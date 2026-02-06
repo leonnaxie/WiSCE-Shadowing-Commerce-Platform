@@ -13,7 +13,7 @@ export default function ProfileMenu({ open, setOpen }: ProfileMenuProps) {
             aria-haspopup="menu"
             aria-expanded={open}
             onClick={ () => setOpen(!open)}>
-            <Image src="/profile_icon.png" alt="Profile" width={50} height={50} />
+            <Image src="/profile_icon.png" alt="Profile" width={85} height={85} />
             </button>
 
             {open && (
