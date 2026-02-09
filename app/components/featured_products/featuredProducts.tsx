@@ -1,3 +1,4 @@
+import Link from "next/link";
 import FPCard from "./fpCard";
 import { dummyFProducts } from "@/mockData/dummyFP";
 
@@ -22,11 +23,13 @@ export default function FeaturedProducts() {
                 ))}
             </div>
 
-            <div className="viewProductListings">
-                <button className="viewPLBtn">
-                    View More
-                </button>
-            </div>
+            <Link href="/routes/products">
+                <div className="viewProductListings">
+                    <button className="viewPLBtn">
+                        View More
+                    </button>
+                </div>
+            </Link>
         </div>
 
 

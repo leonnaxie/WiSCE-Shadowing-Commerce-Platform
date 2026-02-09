@@ -367,7 +367,7 @@ body {
   justify-content: column;
   align-items: column;
   gap: 16px;
-  padding-bottom: 110px;
+  padding-bottom: 80px;
   position: relative;
 }
 
@@ -376,6 +376,7 @@ body {
 }
 
 .featuredProductsTitle {
+  padding-top: 25px;
   font-size: 40px;
   font-weight: 800;
   color: black;
@@ -386,7 +387,7 @@ body {
   flex-direction: column;
   background-color: transparent;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   padding: 10px;
   border-radius: 15px;
   gap: 8px;
@@ -395,6 +396,12 @@ body {
 .fpCards {
   display: flex;
   gap: 50px;
+}
+
+.productWrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
 .fpImageWrapper {
@@ -419,6 +426,7 @@ body {
   font-size: 20px;
   font-weight: 700;
   text-align: left;
+  color: black;
 }
 
 #fProductPrice {
@@ -433,7 +441,10 @@ body {
 
 .fpBtns button {
   flex: 1;
-  width: 120px;
+  height: 50px;
+  font-size: 15px;
+  padding: 6px 8px;
+  width: 120px !important;
   border: none;
   border-radius: 30px;
   cursor: pointer;
@@ -449,7 +460,7 @@ body {
 
 .viewPLBtn {
   padding: 10px 10px;
-  width: 90px;
+  width: 120px;
   background-color: #fff;
   border: none;
   cursor: pointer;

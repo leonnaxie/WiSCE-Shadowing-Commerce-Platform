@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type CarouselCardProps = {
     id: string;
@@ -20,7 +21,9 @@ export default function CarouselCard({ id, image, title, price}: CarouselCardPro
                 <p id="productPrice">{price}</p>
             </div>
 
-            <button className="productLearnMore">Learn More</button>
+            <Link href={`/routes/product/${id}`}>
+                <button className="productLearnMore">Learn More</button>
+            </Link>
         </div>
     )
 }

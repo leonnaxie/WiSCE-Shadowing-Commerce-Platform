@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { UseUser } from "@/app/context/userContext";
 
 type ProfileMenuProps = {
     open: boolean;
@@ -6,6 +8,8 @@ type ProfileMenuProps = {
 }
 
 export default function ProfileMenu({ open, setOpen }: ProfileMenuProps) {
+    const { user, setUser } = UseUser();
+
     return (
         <div className="logIn">
             <button
@@ -18,10 +22,30 @@ export default function ProfileMenu({ open, setOpen }: ProfileMenuProps) {
 
             {open && (
             <div className="profileDropdown" role="menu">
-                <button role="menuitem">Sign In</button>
-                <button role="menuitem">Register</button>
+                {!user ? (
+                    <>
+                    <Link href="/routes/authentication">
+                        <button role="menuitem">Sign In</button>
+                    </Link>
+
+                    <Link href="/routes/authentication">
+                        <button role="menuitem">Register</button>
+                    </Link>
+                    </>
+                ) : (
+                    <>
+                    <Link href="/routes/userprofile">
+                        <button role="menuitem">Profile</button>
+                        <button role="menuitem"
+                        onClick={ () => {
+                            setUser(null);
+                            setOpen(false);
+                        }}>Log Out</button>
+                    </Link>
+                    </>
+                )}
             </div>
             )}
         </div>
-    )
+    );
 }

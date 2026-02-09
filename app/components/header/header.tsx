@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 import SearchBar from "./searchBar";
@@ -13,13 +14,18 @@ export default function Header() {
         <div className="header">
             <div className="logoSearchContainer">
                 <div>
-                    <Image src="/prism_logo.png" alt="Logo" width={300} height={250} />
+                    <Link href="/">
+                        <Image src="/prism_logo.png" alt="Logo" width={300} height={250} />
+                    </Link>
                 </div>
                 <SearchBar />
             </div>
 
             <div className="shopProfileContainer">
-                <ShoppingCart />
+                <Link href="/routes/shoppingcart">
+                    <ShoppingCart />
+                </Link>
+
                 <ProfileMenu open={open} setOpen={setOpen} />
             </div>
         </div>

@@ -9,19 +9,19 @@ export default function Carousel() {
         <ol className="carouselViewPort">
             <li id="carouselSlide1" tabIndex={0} className="carouselSlide">
                 <div className="carouselSnapper">
-                    <CarouselCard id="1" image={"/tote_bag_icon.png"} title="Tote Bag" price="$$$" />
+                    <CarouselCard id="9" image={"/tote_bag_icon.png"} title="Tote Bag" price="$$$" />
                 </div>
             </li>
 
             <li id="carouselSlide2" tabIndex={0} className="carouselSlide">
                 <div className="carouselSnapper">
-                    <CarouselCard id="2" image={"/tote_bag_icon.png"} title="Tote Bag" price="$$$" />
+                    <CarouselCard id="8" image={"/tote_bag_icon.png"} title="Tote Bag" price="$$$" />
                 </div>
             </li>
 
             <li id="carouselSlide3" tabIndex={0} className="carouselSlide">
                 <div className="carouselSnapper">
-                    <CarouselCard id="3" image={"/tote_bag_icon.png"} title="Tote Bag" price="$$$" />
+                    <CarouselCard id="11" image={"/tote_bag_icon.png"} title="Tote Bag" price="$$$" />
                 </div>
             </li>
         </ol>

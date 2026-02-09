@@ -1,0 +1,116 @@
+:root {
+  --header-background: #E0F0F0;
+  --carousel-background: #F9F9F9;
+  --background: #E4F1F1;
+  --button-texts: #ACD3D3;
+  --price: #9FC8C8;
+  --carousel-arrows: #9BC3C3;
+
+  --drop-shadow: #000000;
+
+  --header-height: 120px;
+  --footer-height: 100px;
+
+  --input-background: #F5F5F5;
+
+  --font-color: #FFFFFF;
+}
+
+.userProfilePage {
+    min-height: 100vh;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.profileContent {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 60px 80px;
+}
+
+.profileCard {
+    background: var(--header-background);
+    padding: 50px 60px;
+    border-radius: 20px;
+    box-shadow: 0px 10px 25px rgba(69, 64, 64, 0.25);
+    max-width: 450px;
+}
+
+.profileGreeting {
+    font-size: 35px;
+    font-weight: 800;
+    color: black;
+    margin-bottom: 40px;
+}
+
+.userName {
+    text-decoration: underline;
+}
+
+.profileForm {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.profileField {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 55px;
+}
+
+.profileField label {
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+    min-width: 120px;
+}
+
+.profileField input {
+    background: white;
+    border: 2px solid var(--header-background);
+    border-radius: 15px;
+    padding: 5px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s;
+    flex: 1;
+}
+
+.profileField input:focus {
+    border-color: var(--carousel-arrows);
+}
+
+.profileField input::placeholder {
+    color: var(--carousel-arrows);
+}
+
+.ordersCount {
+    font-size: 25px;
+    color: var(--carousel-arrows);
+    font-weight: 700;
+    padding: 10px;
+    padding: 0;
+}
+
+.saveBtn {
+    background: white;
+    color: var(--carousel-arrows);
+    border: 2px solid var(--carousel-arrows);
+    border-radius: 25px;
+    padding: 10px 40px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    align-self: center;
+    margin-top: 20px;
+    transition: all 0.3s;
+}
+
+.saveBtn:hover {
+    background-color: var(--carousel-arrows);
+    color: white;
+}

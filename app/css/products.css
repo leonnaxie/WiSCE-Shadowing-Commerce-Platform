@@ -1,0 +1,39 @@
+:root {
+  --header-background: #E0F0F0;
+  --carousel-background: #F9F9F9;
+  --background: #E4F1F1;
+  --button-texts: #ACD3D3;
+  --price: #9FC8C8;
+  --carousel-arrows: #9BC3C3;
+
+  --drop-shadow: #000000;
+
+  --header-height: 120px;
+  --footer-height: 100px;
+
+  --input-background: #F5F5F5;
+
+  --font-color: #FFFFFF;
+}
+
+.productHeader {
+    background-color: var(--carousel-background);
+    height: 100px;
+    display: flex;
+}
+
+#allProductsTitle {
+    font-weight: 800;
+    font-size: 45px;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.productsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 35px;
+}

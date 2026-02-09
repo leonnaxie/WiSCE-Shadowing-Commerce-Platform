@@ -1,26 +1,34 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type FPCardProps = {
-    id: string;
+    id: number;
     image: string;
     title: string;
     price: string;
     quantity?: number;
+    description?: string;
 }
 
-export default function FPCard({ id, image, title, price, quantity}: FPCardProps) {
+export default function FPCard({ id, image, title, price, quantity, description}: FPCardProps) {
     return (
         <div className="fpCard">
-            <div className="fpImageWrapper">
+                <Link href={`/routes/product/${id}`}
+                    className="fpImageWrapper"
+                    style={{ position: "relative"}}>
                 <Image src={image} alt={title} fill style={{ objectFit: "contain"}} />
-            </div>
+            </Link>
 
-            <p id="fProductName">{title}</p>
-            <p id="fProductPrice">{price}</p>
+            <div className="productWrapper">
+                 <p id="fProductName">{title}</p>
+                <p id="fProductPrice">{price}</p>
 
-            <div className="fpBtns">
-                <button className="addToCart">Add to Cart</button>
-                <button className="buyNow">Buy Now</button>
+                <div className="fpBtns">
+                    <button className="addToCart">Add to Cart</button>
+                    <Link href="/routes/shoppingcart">
+                        <button className="buyNow">Buy Now</button>
+                    </Link>
+                </div>
             </div>
         </div>
     )

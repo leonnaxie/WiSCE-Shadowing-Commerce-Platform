@@ -1,0 +1,141 @@
+:root {
+  --header-background: #E0F0F0;
+  --carousel-background: #F9F9F9;
+  --background: #E4F1F1;
+  --button-texts: #ACD3D3;
+  --price: #9FC8C8;
+  --carousel-arrows: #9BC3C3;
+
+  --drop-shadow: #000000;
+
+  --header-height: 120px;
+  --footer-height: 100px;
+
+  --input-background: #F5F5F5;
+
+  --font-color: #FFFFFF;
+}
+
+.shoppingCart {
+    display: flex;
+    gap: 280px;
+    padding: 25px;
+
+}
+
+.scHeader {
+    background-color: var(--carousel-background);
+    height: 100px;
+    display: flex;
+}
+
+#shoppingCartTitle {
+    font-weight: 800;
+    font-size: 45px;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.cartSection {
+    height: 400px;
+    width: 600px;
+    margin-left: 15px;
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+}
+
+.shoppingCartItems {
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+}
+
+.cartBorder {
+    border-top: 5px solid #A7CECE;
+    padding: 10px;
+}
+
+.totalPrice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+}
+
+.checkoutFormBody {
+    background-color: var(--carousel-background);
+    height: 450px;
+    width: 500px;
+    border-radius: 25px;
+    box-shadow: 0px 10px 25px rgba(69, 64, 64, 0.25);
+}
+
+.checkoutForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#checkoutForm {
+    font-size: 30px;
+    font-weight: 800;
+    padding: 10px;
+    color: #A7CECE;
+}
+
+.checkoutFlex {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px;
+}
+
+#uName,
+#uAddress,
+#uEmail,
+#uPP {
+    font-size: 20px;
+    font-weight: 700;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: left;
+}
+
+#userName,
+#userAddress,
+#userEmail,
+#userPP {
+    background-color: var(--input-background);
+    border-radius: 20px;
+    outline: 2px solid var(--header-color);
+    text-align: left;
+    padding-left: 5px;
+    width: 250px;
+}
+
+#orderSubmit {
+    background-color: var(--price);
+    color: black;
+    border-radius: 25px;
+    width: 150px;
+    height: 50px;
+    display: flex;
+}
+
+.submitFlex {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-right: 20px;
+}
+
+#thankYouMessage {
+    font-weight: 300;
+    font-style: italic;
+    color: var(--price);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}

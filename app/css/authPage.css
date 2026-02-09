@@ -1,0 +1,144 @@
+:root {
+  --header-background: #E0F0F0;
+  --carousel-background: #F9F9F9;
+  --background: #E4F1F1;
+  --button-texts: #ACD3D3;
+  --price: #9FC8C8;
+  --carousel-arrows: #9BC3C3;
+
+  --drop-shadow: #000000;
+
+  --header-height: 120px;
+  --footer-height: 100px;
+
+  --input-background: #F5F5F5;
+
+  --font-color: #FFFFFF;
+}
+
+.authenticationBody {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #9BC3C3 20%, #F9F9F9 100%);
+}
+
+.authContainer {
+    background: var(--carousel-background);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0px 10px 25px rgba(69, 64, 64, 0.25);
+    width: 100%;
+    max-width: 400px;
+}
+
+.authTitle {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 20px;
+    color: black;
+    font-weight: 800;
+}
+
+.authToggle {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.authToggle button {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid var(--header-background);
+    border-radius: 10px;
+    background: var(--carousel-background);
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.3s;
+}
+
+.authToggle button.active {
+    background-color: var(--header-background);
+    color: white;
+}
+
+.authForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formFlex {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+    padding: 10px;
+}
+
+.formFlex label {
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+}
+
+.formFlex input {
+    background-color: var(--input-background);
+    border-radius: 20px;
+    outline: 2px solid var(--header-color);
+    text-align: left;
+    padding: 10px 15px;
+    flex: 1;
+    width: 250px;
+    text-align: left;
+}
+
+.submitAuthForm {
+    background-color: var(--price);
+    color: black;
+    border-radius: 25px;
+    width: 150px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submitFlex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divider {
+    padding: 15px;
+    color: var(--carousel-arrows);
+    font-weight: 800;
+}
+
+.googleBtn {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    background: white;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    color: black;
+    transition: all 0.3s;
+}
+
+.googleBtn:hover {
+    border-color: var(--header-color);
+}
+
+.googleIcon {
+    font-weight: 800;
+    color: var(--header-background);
+}

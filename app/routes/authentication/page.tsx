@@ -1,5 +1,10 @@
+import AuthForm from "@/app/components/auth/authForm";
+import "@/app/css/authPage.css";
+
 export default function AuthPage() {
     return (
-        <div>Auth page will be here</div>
+        <div className="authenticationBody">
+            <AuthForm />
+        </div>
     )
 }
