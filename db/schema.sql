@@ -46,3 +46,11 @@ FROM order_items;
 INSERT INTO users (id, email, password_hash) VALUES (DEFAULT, 'jackharris@gmail.com', 'abefj123');
 
 SELECT * FROM users;
+
+ALTER TABLE users ADD COLUMN username VARCHAR(255);
+SELECT * FROM users;
+
+
+UPDATE users
+SET username = 'jharris'
+WHERE username IS NULL;

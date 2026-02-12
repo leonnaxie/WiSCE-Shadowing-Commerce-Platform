@@ -1,14 +1,17 @@
 "use client"
 
 import { useState } from "react";
+import { UseUser } from "@/app/context/userContext";
 
 export default function AuthForm() {
+    const { setUser } = UseUser();
+
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!isLogin && password !== confirmPassword) {
@@ -16,7 +19,30 @@ export default function AuthForm() {
             return;
         }
 
-        console.log('Form submitted:', { email, password, isLogin });
+        /** API FETCHING */
+        try {
+            const endpoint = isLogin ? "/api/users/login" : "/api/users";
+            const res = await fetch(endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify(isLogin ?
+                    { usernameOrEmail: email, password } :
+                    { username: email.split("@")[0], email, password })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                alert(data.error);
+                return;
+            }
+
+            setUser(data);
+            console.log("User logged in:", {data});
+        } catch (err) {
+            console.log(err);
+            alert("Something went wrong.");
+        }
     };
 
     return (

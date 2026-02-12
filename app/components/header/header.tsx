@@ -6,6 +6,7 @@ import Image from "next/image";
 import SearchBar from "./searchBar";
 import ProfileMenu from "./profileMenu";
 import ShoppingCart from "./shoppingCart";
+import TestUsers from "../testComponents/testUsers";
 
 export default function Header() {
     const [open, setOpen] = useState(false);
@@ -27,6 +28,8 @@ export default function Header() {
                 </Link>
 
                 <ProfileMenu open={open} setOpen={setOpen} />
+
+                <TestUsers />
             </div>
         </div>
     )
