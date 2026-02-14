@@ -68,3 +68,5 @@ CREATE TABLE sessions (
 );
 
 SELECT * FROM sessions;
+
+DELETE FROM users WHERE id = 2;

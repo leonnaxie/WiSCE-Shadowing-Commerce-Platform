@@ -36,6 +36,7 @@ export default function ProfileMenu({ open, setOpen }: ProfileMenuProps) {
                     <>
                     <Link href="/routes/userprofile">
                         <button role="menuitem" id="profile">Profile</button>
+                    </Link>
 
                         <button role="menuitem" id="log_out"
                         onClick={ async () => {
@@ -49,7 +50,6 @@ export default function ProfileMenu({ open, setOpen }: ProfileMenuProps) {
                                 alert("something went wrong with logging out.");
                             }
                         }}>Log Out</button>
-                    </Link>
                     </>
                 )}
             </div>

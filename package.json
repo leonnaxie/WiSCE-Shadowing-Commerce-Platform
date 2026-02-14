@@ -9,8 +9,10 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@react-oauth/google": "^0.13.4",
     "bcrypt": "^6.0.0",
     "context": "^3.0.33",
+    "google-auth-library": "^10.5.0",
     "next": "16.1.6",
     "pg": "^8.18.0",
     "react": "19.2.3",

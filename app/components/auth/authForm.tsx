@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { UseUser } from "@/app/context/userContext";
 import { useRouter } from "next/navigation";
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
+import { NextResponse } from "next/server";
+
 
 export default function AuthForm() {
     const router = useRouter();
@@ -12,6 +15,38 @@ export default function AuthForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
+    const googleLogin = useGoogleLogin({
+        flow: "auth-code",
+        onSuccess: async (codeResponse) => {
+            try {
+                const res = await fetch("/api/users/google-login", {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ code: codeResponse.code })
+                });
+
+                const data = await res.json();
+                if (!res.ok) {
+                    return NextResponse.json(
+                        { error: "Google login failed"},
+                        { status: 400 }
+                    );
+                };
+
+                setUser(data);
+                router.push("/");
+            } catch (err) {
+                console.log(err);
+                return NextResponse.json(
+                    { error: "Google login failed"},
+                    { status: 400 }
+                );
+            };
+        }
+    })
+
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -114,7 +149,7 @@ export default function AuthForm() {
                 <span>OR</span>
             </div>
 
-            <div className="googleBtn">
+            <div className="googleBtn" onClick={() => googleLogin()}>
                 <span className="googleIcon">G</span>
                 Sign In Through Google
             </div>
