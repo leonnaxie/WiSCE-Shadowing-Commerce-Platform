@@ -2,18 +2,46 @@
 
 import Header from "@/app/components/header/header";
 import Footer from "@/app/components/footer/footer";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import "@/app/css/userProfile.css";
+import { UseUser } from "@/app/context/userContext";
 
 export default function UserProfile() {
-    const [name, setName] = useState("Person");
-    const [email, setEmail] = useState("something@gmail.com");
-    const [address, setAddress] = useState("somewhere, somewhere");
-    const [ordersPlaced, setOrdersPlaced] = useState(0);
+    const { user, setUser }= UseUser();
+    const [name, setName] = useState(user?.name || "Person");
+    const [email, setEmail] = useState(user?.email || "");
+    const [address, setAddress] = useState(user?.address || "");
+    const [ordersPlaced, setOrdersPlaced] = useState(user?.orders_placed || 0);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    useEffect(() => {
+        if (user) {
+            setName(user.name || "");
+            setEmail(user.email || "");
+            setAddress(user.address || "");
+            setOrdersPlaced(user.orders_placed || 0);
+        }
+    }, [user]);
+
+    const handleSubmit = async(e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Saved:', { name, email, ordersPlaced });
+        const updatedUser = { name, email, address };
+        try {
+            const res = await fetch("/api/users/me", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(updatedUser),
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                alert(data.error || "Failed to update profile");
+                return;
+            }
+
+            setUser(data);
+        } catch (err) {
+            console.log(err);
+            alert("Something went wrong with updating your profile.");
+        }
     };
 
     return (

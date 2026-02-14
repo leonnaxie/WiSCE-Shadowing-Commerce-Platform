@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import pool from "@/db/databasepg";
 import bcrypt from "bcrypt";
+import crypto from "crypto";
 
 export async function POST(req: Request) {
     try {
@@ -37,11 +38,24 @@ export async function POST(req: Request) {
             );
         }
 
-        return NextResponse.json({
+        const sessionId = crypto.randomBytes(32).toString("hex");
+        await pool.query(
+            "INSERT INTO sessions (session_id, user_id) VALUES ($1, $2)",
+            [sessionId, user.id]
+        );
+
+        const res = NextResponse.json({
             id: user.id,
             email: user.email,
-            username: user.username,
+            username: user.username
         });
+        res.cookies.set("sessionId", sessionId, {
+            httpOnly: true,
+            path: "/",
+            maxAge: 7 * 24 * 60 * 60,
+        });
+
+        return res;
     } catch (err) {
         console.log(err);
         return NextResponse.json(

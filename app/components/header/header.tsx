@@ -28,8 +28,6 @@ export default function Header() {
                 </Link>
 
                 <ProfileMenu open={open} setOpen={setOpen} />
-
-                <TestUsers />
             </div>
         </div>
     )

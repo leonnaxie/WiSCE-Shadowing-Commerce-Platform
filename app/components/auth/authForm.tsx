@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { UseUser } from "@/app/context/userContext";
+import { useRouter } from "next/navigation";
 
 export default function AuthForm() {
+    const router = useRouter();
     const { setUser } = UseUser();
 
     const [isLogin, setIsLogin] = useState(true);
@@ -39,6 +41,8 @@ export default function AuthForm() {
 
             setUser(data);
             console.log("User logged in:", {data});
+            router.push("/");
+
         } catch (err) {
             console.log(err);
             alert("Something went wrong.");

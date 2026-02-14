@@ -54,3 +54,17 @@ SELECT * FROM users;
 UPDATE users
 SET username = 'jharris'
 WHERE username IS NULL;
+
+ALTER TABLE users ADD COLUMN address TEXT;
+ALTER TABLE users ADD COLUMN orders_placed INTEGER;
+SELECT * FROM users;
+
+
+CREATE TABLE sessions (
+    id SERIAL PRIMARY KEY,
+    session_id VARCHAR(128) UNIQUE NOT NULL,
+    user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+SELECT * FROM sessions;
