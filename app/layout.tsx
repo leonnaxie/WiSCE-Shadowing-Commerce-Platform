@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { UserProvider } from "./context/userContext";
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { CartProvider } from "./context/cartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +32,9 @@ export default function RootLayout({
       >
         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
           <UserProvider>
-            {children}
+            <CartProvider>
+              {children}
+            </CartProvider>
           </UserProvider>
         </GoogleOAuthProvider>
       </body>

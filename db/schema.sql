@@ -67,6 +67,8 @@ CREATE TABLE sessions (
     created_at TIMESTAMP DEFAULT NOW()
 );
 
+SELECT * FROM users;
+SELECT * FROM orders;
+SELECT * FROM products;
+SELECT * FROM order_items;
 SELECT * FROM sessions;
-
-DELETE FROM users WHERE id = 2;

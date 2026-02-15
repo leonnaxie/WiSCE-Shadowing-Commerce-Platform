@@ -15,12 +15,27 @@ export default function UserProfile() {
 
     useEffect(() => {
         if (user) {
-            setName(user.name || "");
+            setName(user.name || "Person");
             setEmail(user.email || "");
             setAddress(user.address || "");
             setOrdersPlaced(user.orders_placed || 0);
         }
     }, [user]);
+
+    useEffect(() => {
+        async function fetchUser() {
+            try {
+                const res = await fetch("/api/users/me", { credentials: "include" });
+                if (!res.ok) throw new Error("failed to fetch user");
+                const data = await res.json();
+                setUser(data);
+            } catch(err) {
+                console.log(err);
+            }
+        }
+
+        if (!user) fetchUser();
+    }, []);
 
     const handleSubmit = async(e: React.FormEvent) => {
         e.preventDefault();
@@ -29,6 +44,7 @@ export default function UserProfile() {
             const res = await fetch("/api/users/me", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
+                credentials: "include",
                 body: JSON.stringify(updatedUser),
             });
             const data = await res.json();

@@ -39,9 +39,11 @@ export async function POST(req: Request) {
 
         const { email, name } = payload;
         const userResult = await pool.query(
-            "SELECT id, username, email FROM users WHERE email=$1",
+            "SELECT id, username, email, address, orders_placed FROM users WHERE email=$1",
             [email]
         );
+
+        console.log("Existing user query result:", userResult.rows[0]);
 
 
         let user;
@@ -56,8 +58,8 @@ export async function POST(req: Request) {
 
             try {
                 const insertResult = await pool.query(
-                "INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING id, username, email",
-                [username, email, hashedPassword]
+                "INSERT INTO users (username, email, password_hash, address, orders_placed) VALUES ($1, $2, $3, $4, $5) RETURNING id, username AS name, email, address, orders_placed",
+                [username, email, hashedPassword, "", 0]
                 );
                 user = insertResult.rows[0];
                 console.log("new user created", user.id);
@@ -74,8 +76,10 @@ export async function POST(req: Request) {
 
         const response = NextResponse.json({
             id: user.id,
-            username: user.username,
-            email: user.email
+            name: user.username,
+            email: user.email,
+            address: user.address || "",
+            orders_placed: user.orders_placed || 0
         });
 
         response.cookies.set("sessionId", sessionId, {

@@ -1,8 +1,43 @@
+"use client"
+
 import Header from "@/app/components/header/header";
 import Footer from "@/app/components/footer/footer";
 import "@/app/css/shoppingCart.css";
+import { UseUser } from "@/app/context/userContext";
+import { useState, useEffect } from "react";
 
 export default function CartPage() {
+    const { user, setUser } = UseUser();
+    const [name, setName] = useState(user?.name || "");
+    const [email, setEmail] = useState(user?.email || "");
+    const [address, setAddress] = useState(user?.address || "");
+    const [paymentMethod, setPaymentMethod] = useState("");
+
+    useEffect(() => {
+        if (user) {
+            setName(user.name || "");
+            setEmail(user.email || "");
+            setAddress(user.address || "");
+            setPaymentMethod("");
+        }
+    }, [user]);
+
+    useEffect(() => {
+        async function fetchUser() {
+            try {
+                const res = await fetch("/api/users/me", { credentials: "include" });
+                if (!res.ok) throw new Error("failed to fetch user information");
+                const data = await res.json();
+                setUser(data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        if (!user) fetchUser();
+    }, []);
+
+
+
     return (
         <div className="shoppingCartBody">
             <Header />
@@ -29,22 +64,22 @@ export default function CartPage() {
                     <form className="checkoutForm">
                         <div className="checkoutFlex">
                             <label htmlFor="userName" id="uName">Name:</label>
-                            <input type="text" id="userName" name="userName" required />
+                            <input type="text" id="userName" name="userName" value={name} onChange={(e) => setName(e.target.value)} required />
                         </div>
 
                         <div className="checkoutFlex">
                             <label htmlFor="userAddress" id="uAddress">Address:</label>
-                            <input type="text" id="userAddress" name="userAddress" required />
+                            <input type="text" id="userAddress" name="userAddress" value={address} onChange={(e) => setAddress(e.target.value)} required />
                         </div>
 
                         <div className="checkoutFlex">
                             <label htmlFor="userEmail" id="uEmail">Email:</label>
-                            <input type="email" id="userEmail" name="userEmail" required />
+                            <input type="email" id="userEmail" name="userEmail" value={email} onChange={(e) => setEmail(e.target.value)} required />
                         </div>
 
                         <div className="checkoutFlex">
                             <label htmlFor="userPP" id="uPP">Payment Method:</label>
-                            <input type="text" id="userPP" name="userPP" required />
+                            <input type="text" id="userPP" name="userPP" value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)} required />
                         </div>
 
                         <div className="submitFlex">

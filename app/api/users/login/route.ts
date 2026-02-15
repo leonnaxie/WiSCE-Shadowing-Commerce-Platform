@@ -15,7 +15,7 @@ export async function POST(req: Request) {
         }
 
         const result = await pool.query(
-            `SELECT id, email, password_hash, username
+            `SELECT id, email, password_hash, username, address, orders_placed
             FROM users
             WHERE email = $1 OR username = $1`,
             [usernameOrEmail]
@@ -47,7 +47,9 @@ export async function POST(req: Request) {
         const res = NextResponse.json({
             id: user.id,
             email: user.email,
-            username: user.username
+            name: user.username,
+            address: user.address,
+            orders_placed: user.orders_placed
         });
         res.cookies.set("sessionId", sessionId, {
             httpOnly: true,

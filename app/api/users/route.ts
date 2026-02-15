@@ -29,10 +29,10 @@ export async function POST(req: Request) {
         const passwordHash = await bcrypt.hash(password, 10);
 
         const result = await pool.query(
-            `INSERT INTO users (email, password_hash, username)
-            VALUES ($1, $2, $3)
-            RETURNING id, email, username`,
-            [email, passwordHash, username]
+            `INSERT INTO users (email, password_hash, username, address, orders_placed)
+            VALUES ($1, $2, $3, $4, $5)
+            RETURNING id, email, username, address, orders_placed`,
+            [email, passwordHash, username, "", 0]
         );
 
         const user = result.rows[0];
@@ -43,7 +43,15 @@ export async function POST(req: Request) {
             [sessionId, user.id]
         );
 
-        const res = NextResponse.json(user, { status: 201 });
+
+        const res = NextResponse.json({
+            id: user.id,
+            email: user.email,
+            name: user.username,
+            address: user.address,
+            orders_placed: user.orders_placed
+        }, { status: 201 });
+        
         res.cookies.set("sessionId", sessionId, {
             httpOnly: true,
             path: "/",

@@ -28,20 +28,15 @@ export default function AuthForm() {
 
                 const data = await res.json();
                 if (!res.ok) {
-                    return NextResponse.json(
-                        { error: "Google login failed"},
-                        { status: 400 }
-                    );
+                    alert(data.error || "Google login failed");
+                    return;
                 };
 
                 setUser(data);
                 router.push("/");
             } catch (err) {
                 console.log(err);
-                return NextResponse.json(
-                    { error: "Google login failed"},
-                    { status: 400 }
-                );
+                alert("Google login failed");
             };
         }
     })

@@ -26,6 +26,8 @@ export async function GET(req: Request) {
         return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
+    console.log("GET /api/users/me - User data:", userResult.rows[0]);
+
     return NextResponse.json(userResult.rows[0]);
 }
 
@@ -51,6 +53,9 @@ export async function PUT(req: Request) {
         const userId = sessionRes.rows[0].user_id;
         const { name, email, address } = await req.json();
 
+        console.log("PUT /api/users/me - Updating User:", userId);
+        console.log("Data received:", { name, email, address });
+
         const updateRes = await pool.query(
             `UPDATE users
             SET username = $1,
@@ -60,8 +65,12 @@ export async function PUT(req: Request) {
             RETURNING id, username AS name, email, address, orders_placed`,
             [name, email, address, userId]
         );
+
+        console.log("Update result:", updateRes.rows[0]);
+
         return NextResponse.json(updateRes.rows[0]);
     } catch (err) {
+        console.error("PUT /api/users/me error:", err);
         return NextResponse.json({ error: "update failed"}, { status: 500});
     }
 }
