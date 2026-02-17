@@ -5,9 +5,13 @@ import Footer from "@/app/components/footer/footer";
 import "@/app/css/shoppingCart.css";
 import { UseUser } from "@/app/context/userContext";
 import { useState, useEffect } from "react";
+import { UseCart } from "@/app/context/cartContext";
+import Image from "next/image";
 
 export default function CartPage() {
     const { user, setUser } = UseUser();
+    const { cart, updateQuantity, removeFromCart, clearCart } = UseCart();
+
     const [name, setName] = useState(user?.name || "");
     const [email, setEmail] = useState(user?.email || "");
     const [address, setAddress] = useState(user?.address || "");
@@ -36,6 +40,29 @@ export default function CartPage() {
         if (!user) fetchUser();
     }, []);
 
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log("Order submitted:", { name, email, address, paymentMethod, cart });
+        clearCart();
+    }
+
+    const incrementQuantity = (id: number, currentQuantity: number) => {
+        updateQuantity(id, currentQuantity + 1);
+    }
+
+    const decrementQuantity = (id: number, currentQuantity: number) => {
+        if (currentQuantity > 1) {
+            updateQuantity(id, currentQuantity - 1);
+        }
+    };
+
+    const getTotalPrice = () => {
+        return cart.reduce((total, item) => {
+            const price = parseFloat(item.price.replace('$', ''));
+            return total + (price * item.quantity);
+        }, 0);
+    };
+
 
 
     return (
@@ -48,14 +75,40 @@ export default function CartPage() {
 
             <div className="shoppingCart">
                 <div className="cartSection">
-                    <ol className="shoppingCartItems">
-                        <li id="scItem">Example</li>
-                        <li id="scItem">Example</li>
-                    </ol>
+                        {cart.length === 0 ? (<p style={{ padding: '20px', textAlign: 'center', }}>Your Cart is Empty</p>) :
+                        (
+                            <>
+                            <ol className="shoppingCartItems">
+                                {cart.map((item) => (
+                                    <li key={item.id} className="cartItem">
+                                        <div className="cartItemImage">
+                                            <Image src={item.image} alt={item.title} fill style={{ objectFit: 'contain' }} />
+                                        </div>
+
+                                        <div className="cartItemDetails">
+                                            <div className="titlePriceRow">
+                                                <h3 className="cartItemTitle">{item.title}</h3>
+                                                <div className="cartItemTotal">${(parseFloat(item.price.replace("$", "")) * item.quantity).toFixed(2)}</div>
+                                            </div>
+                                            <p className="cartItemDescription">{item.description}</p>
+                                            <div className="itemButtons">
+                                                <div className="quantityControls">
+                                                <button onClick={() => decrementQuantity(item.id, item.quantity)} disabled={item.quantity <= 1}>-</button>
+                                                <span>{item.quantity}</span>
+                                                <button onClick={() => incrementQuantity(item.id, item.quantity)}>+</button>
+                                                </div>
+                                                <button onClick={() => removeFromCart(item.id)} className="removeBtn">Remove</button>
+                                            </div>
+                                            </div>
+                                    </li>
+                                ))}
+                            </ol>
+                            </>
+                        )}
                     <div className="cartBorder">
                         <div className="totalPrice">
                             <p>Total</p>
-                            <p>$$$</p>
+                            <p>${getTotalPrice().toFixed(2)}</p>
                         </div>
                     </div>
                 </div>

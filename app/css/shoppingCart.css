@@ -45,6 +45,12 @@
     flex-direction: column;
 }
 
+.titlePriceRow {
+    display: flex;
+    gap: 25px;
+    font-size: 25px;
+}
+
 .shoppingCartItems {
     display: flex;
     gap: 30px;
@@ -138,4 +144,94 @@
     justify-content: center;
     align-items: center;
     padding: 30px;
+}
+
+.shoppingCartItems {
+    display: flex;
+}
+
+.cartItem {
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+}
+
+.cartItemImage {
+    display: flex;
+    flex: 1;
+    background-color: white;
+    flex-shrink: 0;
+    position: relative;
+    height: 250px;
+    width: 150px;
+    border-radius: 15px;
+}
+
+.cartItemDetails {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cartItemTotal {
+    font-weight: bold;
+    margin-left: auto;
+}
+
+.cartItemDescription {
+    color: black;
+    padding-top: 2px;
+    font-size: 15px;
+    font-style: italic;
+}
+
+.cartItemTitle {
+    font-weight: 700;
+    margin: 0 0 10px 0;
+}
+
+.cartItemTotal {
+    font-size: 30px;
+}
+
+.quantityControls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    justify-content: left;
+}
+
+.quantityControls button {
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    border: 2px solid black;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.removeBtn {
+    width: 75px;
+    height: 35px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.itemButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.quantityControls button:hover,
+.removeBtn:hover {
+    background-color: var(--price);
 }

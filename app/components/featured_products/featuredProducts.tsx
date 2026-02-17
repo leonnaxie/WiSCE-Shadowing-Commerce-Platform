@@ -1,8 +1,16 @@
+"use client"
+
 import Link from "next/link";
 import FPCard from "./fpCard";
 import { dummyFProducts } from "@/mockData/dummyFP";
+import { ProductItem, ProductContext } from "@/app/context/productContext";
+import { useContext } from "react";
 
 export default function FeaturedProducts() {
+    const context = useContext(ProductContext);
+    if (!context) throw new Error("ProductContext must be used within a Product Provider");
+    const { products } = context;
+
     return (
     <div className="mainContent">
         <div className="featuredProducts">
@@ -12,7 +20,7 @@ export default function FeaturedProducts() {
             </div>
 
             <div className="fpCards">
-                {dummyFProducts.map((product) => (
+                {products.map((product:ProductItem) => (
                 <FPCard
                 key ={product.id}
                 id={product.id}
