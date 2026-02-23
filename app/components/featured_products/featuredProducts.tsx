@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import FPCard from "./fpCard";
-import { dummyFProducts } from "@/mockData/dummyFP";
 import { ProductItem, ProductContext } from "@/app/context/productContext";
 import { useContext } from "react";
 
@@ -20,7 +19,7 @@ export default function FeaturedProducts() {
             </div>
 
             <div className="fpCards">
-                {products.map((product:ProductItem) => (
+                {products.slice(0, 5).map((product:ProductItem) => (
                 <FPCard
                 key ={product.id}
                 id={product.id}

@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
@@ -9,7 +11,7 @@ type FPCardProps = {
     id: number;
     image: string;
     title: string;
-    price: string;
+    price: number;
     quantity?: number;
     description?: string;
 }

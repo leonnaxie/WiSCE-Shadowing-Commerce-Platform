@@ -58,8 +58,7 @@ export default function CartPage() {
 
     const getTotalPrice = () => {
         return cart.reduce((total, item) => {
-            const price = parseFloat(item.price.replace('$', ''));
-            return total + (price * item.quantity);
+            return total + (item.price * item.quantity);
         }, 0);
     };
 
@@ -88,7 +87,7 @@ export default function CartPage() {
                                         <div className="cartItemDetails">
                                             <div className="titlePriceRow">
                                                 <h3 className="cartItemTitle">{item.title}</h3>
-                                                <div className="cartItemTotal">${(parseFloat(item.price.replace("$", "")) * item.quantity).toFixed(2)}</div>
+                                                <div className="cartItemTotal">${(item.price * item.quantity).toFixed(2)}</div>
                                             </div>
                                             <p className="cartItemDescription">{item.description}</p>
                                             <div className="itemButtons">
