@@ -127,7 +127,10 @@ body {
   cursor: pointer;
 }
 
-.profileDropdown:hover {
+#register:hover,
+#sign_in:hover,
+#profile:hover,
+#log_out:hover {
   color: var(--button-texts);
 }
 

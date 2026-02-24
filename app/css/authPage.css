@@ -116,6 +116,9 @@
     padding: 15px;
     color: var(--carousel-arrows);
     font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .googleBtn {

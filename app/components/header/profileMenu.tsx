@@ -25,23 +25,31 @@ export default function ProfileMenu({ open, setOpen }: ProfileMenuProps) {
                 {!user ? (
                     <>
                     <Link href="/routes/authentication">
-                        <button role="menuitem">Sign In</button>
+                        <button role="menuitem" id="sign_in">Sign In</button>
                     </Link>
 
                     <Link href="/routes/authentication">
-                        <button role="menuitem">Register</button>
+                        <button role="menuitem" id="register">Register</button>
                     </Link>
                     </>
                 ) : (
                     <>
                     <Link href="/routes/userprofile">
-                        <button role="menuitem">Profile</button>
-                        <button role="menuitem"
-                        onClick={ () => {
-                            setUser(null);
-                            setOpen(false);
-                        }}>Log Out</button>
+                        <button role="menuitem" id="profile">Profile</button>
                     </Link>
+
+                        <button role="menuitem" id="log_out"
+                        onClick={ async () => {
+                            try {
+                                const res = await fetch("/api/users/logout", { method: "POST"});
+                                if (!res.ok) throw new Error("Log out failed");
+
+                                setUser(null);
+                            } catch (err) {
+                                console.log(err);
+                                alert("something went wrong with logging out.");
+                            }
+                        }}>Log Out</button>
                     </>
                 )}
             </div>

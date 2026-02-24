@@ -1,10 +1,20 @@
-import { dummyFProducts } from "@/mockData/dummyFP";
+"use client"
+
 import FPCard from "../../components/featured_products/fpCard";
 import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer";
+import { useEffect, useState } from "react";
 import "@/app/css/products.css";
 
 export default function ProductsPage() {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        fetch("/api/products")
+        .then(res => res.json())
+        .then(data => setProducts(data));
+    }, []);
+
     return (
         <div className="productsPageBody">
             <Header />
@@ -14,21 +24,14 @@ export default function ProductsPage() {
             </div>
 
             <div className="productsGrid">
-                {dummyFProducts.map(product => (                    
+                {products.map((product:any) => (
                     <FPCard
-                    key={product.id}
-                    id={product.id}
-                    image={product.image}
-                    title={product.title}
-                    price={product.price} />
-                ))}
-                {dummyFProducts.map(product => (                    
-                    <FPCard
-                    key={product.id}
-                    id={product.id}
-                    image={product.image}
-                    title={product.title}
-                    price={product.price} />
+                        key={product.product_id}
+                        id={product.product_id}
+                        image={product.image_url}
+                        title={product.product_name}
+                        price={product.product_price}
+                    />
                 ))}
             </div>
 

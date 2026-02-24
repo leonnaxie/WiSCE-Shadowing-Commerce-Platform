@@ -1,14 +1,49 @@
 "use client"
 
 import { useState } from "react";
+import { UseUser } from "@/app/context/userContext";
+import { useRouter } from "next/navigation";
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
+import { NextResponse } from "next/server";
+
 
 export default function AuthForm() {
+    const router = useRouter();
+    const { setUser } = UseUser();
+
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const googleLogin = useGoogleLogin({
+        flow: "auth-code",
+        onSuccess: async (codeResponse) => {
+            try {
+                const res = await fetch("/api/users/google-login", {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ code: codeResponse.code })
+                });
+
+                const data = await res.json();
+                if (!res.ok) {
+                    alert(data.error || "Google login failed");
+                    return;
+                };
+
+                setUser(data);
+                router.push("/");
+            } catch (err) {
+                console.log(err);
+                alert("Google login failed");
+            };
+        }
+    })
+
+
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!isLogin && password !== confirmPassword) {
@@ -16,7 +51,32 @@ export default function AuthForm() {
             return;
         }
 
-        console.log('Form submitted:', { email, password, isLogin });
+        /** API FETCHING */
+        try {
+            const endpoint = isLogin ? "/api/users/login" : "/api/users";
+            const res = await fetch(endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify(isLogin ?
+                    { usernameOrEmail: email, password } :
+                    { username: email.split("@")[0], email, password })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                alert(data.error);
+                return;
+            }
+
+            setUser(data);
+            console.log("User logged in:", {data});
+            router.push("/");
+
+        } catch (err) {
+            console.log(err);
+            alert("Something went wrong.");
+        }
     };
 
     return (
@@ -84,7 +144,7 @@ export default function AuthForm() {
                 <span>OR</span>
             </div>
 
-            <div className="googleBtn">
+            <div className="googleBtn" onClick={() => googleLogin()}>
                 <span className="googleIcon">G</span>
                 Sign In Through Google
             </div>
