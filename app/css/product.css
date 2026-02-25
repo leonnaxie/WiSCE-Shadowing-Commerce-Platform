@@ -105,3 +105,15 @@
     background-color: var(--carousel-arrows);
     color: white;
 }
+
+.productTitlePriceHeader {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 180px;
+}
+
+.productPrice {
+    font-size: 30px;
+    font-weight: 700;
+}
