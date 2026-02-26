@@ -4,7 +4,7 @@ CREATE TABLE users (
     password_hash VARCHAR(255) NOT NULL,
 );
 
-SELECT * FROM users;
+SELECT * FROM products;
 
 CREATE table products (
     product_id SERIAL PRIMARY KEY,
@@ -297,3 +297,11 @@ VALUES
     99,
     '/product_images/fluffy_roll_bag.png'
 )
+
+ALTER TABLE orders
+ALTER COLUMN customer_id DROP NOT NULL;
+SELECT * FROM orders;
+
+ALTER TABLE orders 
+ADD COLUMN email TEXT NOT NULL;
+SELECT * FROM orders;
