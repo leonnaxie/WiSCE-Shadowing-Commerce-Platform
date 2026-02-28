@@ -31,6 +31,15 @@ export async function POST(req: Request) {
         const orderId = orderResult.rows[0].order_id;
         let totalPrice = 0;
 
+        if (customerId) {
+            await client.query(
+                `UPDATE users
+                SET orders_placed = orders_placed + 1
+                WHERE id = $1`,
+                [customerId]
+            );
+        }
+
         for (const item of items) {
             const { productId, quantity } = item;
 

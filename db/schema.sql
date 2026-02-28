@@ -305,3 +305,12 @@ SELECT * FROM orders;
 ALTER TABLE orders 
 ADD COLUMN email TEXT NOT NULL;
 SELECT * FROM orders;
+
+UPDATE products
+SET stock_quantity = 99
+WHERE product_id = 2;
+SELECT * FROM products;
+
+UPDATE users
+SET orders_placed = 0
+WHERE id = 11;
