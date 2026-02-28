@@ -40,10 +40,40 @@ export default function CartPage() {
         if (!user) fetchUser();
     }, []);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Order submitted:", { name, email, address, paymentMethod, cart });
-        clearCart();
+        if (cart.length === 0) {
+            alert("Your cart is empty.");
+            return;
+        }
+
+        try {
+            const res = await fetch("/api/orders", {
+                method: "POST",
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify({
+                    customerId: user?.id || null,
+                    shippingAddress: address,
+                    paymentMethod,
+                    email,
+                    items: cart.map(item => ({
+                        productId: item.id,
+                        quantity: item.quantity
+                    }))
+                })
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                alert(data.error || "Order failed");
+                return;
+            }
+
+            clearCart();
+            console.log("Order placed successfully!");
+        } catch (err) {
+            console.log(err);
+            alert("Something went wrong.");
+        }
     }
 
     const incrementQuantity = (id: number, currentQuantity: number) => {
@@ -113,7 +143,7 @@ export default function CartPage() {
                 </div>
                 <div className="checkoutFormBody">
                     <p id="checkoutForm">Checkout</p>
-                    <form className="checkoutForm">
+                    <form className="checkoutForm" onSubmit={handleSubmit}>
                         <div className="checkoutFlex">
                             <label htmlFor="userName" id="uName">Name:</label>
                             <input type="text" id="userName" name="userName" value={name} onChange={(e) => setName(e.target.value)} required />

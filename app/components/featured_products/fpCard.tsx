@@ -58,7 +58,7 @@ export default function FPCard({ id, image, title, price, quantity, description}
 
             <div className="productWrapper">
                  <p id="fProductName">{title}</p>
-                <p id="fProductPrice">{price}</p>
+                <p id="fProductPrice">${price.toFixed(2)}</p>
 
                 <div className="fpBtns">
                     <button className="addToCart" onClick={handleAddtoCart}>Add to Cart</button>

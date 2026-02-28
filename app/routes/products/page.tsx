@@ -30,7 +30,7 @@ export default function ProductsPage() {
                         id={product.product_id}
                         image={product.image_url}
                         title={product.product_name}
-                        price={product.product_price}
+                        price={Number(product.product_price)}
                     />
                 ))}
             </div>
