@@ -4,7 +4,7 @@ CREATE TABLE users (
     password_hash VARCHAR(255) NOT NULL,
 );
 
-SELECT * FROM users;
+SELECT * FROM products;
 
 CREATE table products (
     product_id SERIAL PRIMARY KEY,
@@ -221,3 +221,104 @@ VALUES
     99,
     '/product_images/mesh_itabag.png'
 );
+
+
+
+INSERT INTO products
+(product_name, product_price, product_description, stock_quantity, image_url)
+VALUES
+(
+    'Blue Ribbon Bag',
+    25,
+    'Laced with blue ribbons, and a miniature bow.',
+    99,
+    '/product_images/blue_ribbon_bag.png'
+),
+(
+    'Scrunched Bag',
+    15,
+    'A scrunched up pink bag.',
+    99,
+    '/product_images/pink_stretch_bag.png'
+),
+(
+    'Metallic Bag',
+    20,
+    'A shiny gray bag that is sleek and light.',
+    99,
+    '/product_images/metallic_bag.png'
+),
+(
+    'Pure Pink Bag',
+    10,
+    'A miniature but compact bag to carry around every day.',
+    99,
+    '/product_images/pure_bag.png'
+),
+(
+    'Decorated Black Bag',
+    25,
+    'A strapped black bag with silver and teal accessories.',
+    99,
+    '/product_images/decorated_black_bag.png'
+),
+(
+    'Old Purse',
+    35,
+    'A delicate and handmade bag with a crocheted front.',
+    99,
+    '/product_images/purse_bag.png'
+),
+(
+    'Polkadot Tote Bag',
+    25,
+    'A cotton tote bag with a blue polkadot pattern all around.',
+    99,
+    '/product_images/polkadot_totebag.png'
+),
+(
+    'Green Tote Bag',
+    25,
+    'A wider green totebag with a motivating quote printed on the side.',
+    99,
+    '/product_images/green_bag.png'
+),
+(
+    'Red Leather Bag',
+    45,
+    'A compact, small red leather bag with ribbon attachments.',
+    99,
+    '/product_images/red_bag.png'
+),
+(
+    'Roll Bag',
+    40,
+    'A fluffy, long white bag that is shaped as a roll with a tiny charm.',
+    99,
+    '/product_images/fluffy_roll_bag.png'
+)
+
+ALTER TABLE orders
+ALTER COLUMN customer_id DROP NOT NULL;
+SELECT * FROM orders;
+
+ALTER TABLE orders 
+ADD COLUMN email TEXT NOT NULL;
+SELECT * FROM orders;
+
+UPDATE products
+SET stock_quantity = 99
+WHERE product_id = 2;
+SELECT * FROM products;
+
+UPDATE products
+SET stock_quantity = 99
+WHERE product_id = 4;
+
+UPDATE products
+SET stock_quantity = 99
+WHERE product_id = 1;
+
+UPDATE users
+SET orders_placed = 0
+WHERE id = 8;
