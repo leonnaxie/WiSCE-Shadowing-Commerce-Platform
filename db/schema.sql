@@ -5,6 +5,7 @@ CREATE TABLE users (
 );
 
 SELECT * FROM products;
+SELECT * FROM products;
 
 CREATE table products (
     product_id SERIAL PRIMARY KEY,
@@ -322,3 +323,4 @@ WHERE product_id = 1;
 UPDATE users
 SET orders_placed = 0
 WHERE id = 8;
+SELECT * FROM users;

@@ -50,7 +50,10 @@ export default function ProductPage() {
                 </div>
 
                 <div className="productDetailSection">
-                <h1 className="productTitle">{product.product_name}</h1>
+                <div className="productTitlePriceHeader">
+                    <h1 className="productTitle">{product.product_name}</h1>
+                    <h1 className="productPrice">{product.product_price}</h1>
+                </div>
 
                 <p className="productDescription">{product.product_description}</p>
 
