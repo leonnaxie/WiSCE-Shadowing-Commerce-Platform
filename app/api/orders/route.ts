@@ -6,7 +6,7 @@ export async function POST(req: Request) {
 
     try {
         const body = await req.json();
-        const { customerId, shippingAddress, paymentMethod, email, items } = body;
+        const { customerId, shippingAddress, paymentMethod, email, items, sendEmail } = body;
         
         if (!shippingAddress || !paymentMethod || !email || !items?.length) {
             return NextResponse.json(
@@ -18,15 +18,16 @@ export async function POST(req: Request) {
         await client.query("BEGIN");
         const orderResult = await client.query(
             `INSERT INTO orders
-            (customer_id, order_date, status, total_price, shipping_address, payment_method, email)
-            VALUES ($1, NOW(), $2, $3, $4, $5, $6)
+            (customer_id, order_date, status, total_price, shipping_address, payment_method, email, send_email)
+            VALUES ($1, NOW(), $2, $3, $4, $5, $6, $7)
             RETURNING order_id`,
             [customerId || null,
             "pending",
             0,
             shippingAddress,
             paymentMethod,
-            email]
+            email,
+            sendEmail ?? false]
         );
         const orderId = orderResult.rows[0].order_id;
         let totalPrice = 0;
@@ -85,7 +86,21 @@ export async function POST(req: Request) {
 
         await client.query("COMMIT");
 
-        return NextResponse.json({ success: true, orderId });
+        const responseBody = {
+            success: true,
+            orderId,
+            customerId: customerId || null,
+            shippingAddress,
+            paymentMethod,
+            email,
+            totalPrice,
+            items,
+            sendEmail: sendEmail ?? false
+        };
+
+        console.log("Order inserted: ", JSON.stringify(responseBody, null, 2));
+
+        return NextResponse.json(responseBody);
     } catch (err) {
         await client.query("ROLLBACK");
         console.log(err);

@@ -42,6 +42,16 @@ SELECT * FROM products;
 SELECT * FROM orders;
 SELECT * FROM order_items;
 
+ALTER TABLE orders
+ADD COLUMN send_email
+BOOLEAN DEFAULT FALSE;
+
+UPDATE products
+SET stock_quantity = 99;
+
+
+SELECT * FROM orders;
+
 SELECT order_id 
 FROM order_items;
 
@@ -52,6 +62,9 @@ SELECT * FROM users;
 ALTER TABLE users ADD COLUMN username VARCHAR(255);
 SELECT * FROM users;
 
+
+TRUNCATE TABLE order_items, orders, users RESTART IDENTITY CASCADE;
+TRUNCATE TABLE users RESTART IDENTITY;
 
 UPDATE users
 SET username = 'jharris'
