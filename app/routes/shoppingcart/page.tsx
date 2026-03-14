@@ -16,6 +16,7 @@ export default function CartPage() {
     const [email, setEmail] = useState(user?.email || "");
     const [address, setAddress] = useState(user?.address || "");
     const [paymentMethod, setPaymentMethod] = useState("");
+    const [receiveEmail, setReceiveEmail] = useState(false);
 
     useEffect(() => {
         if (user) {
@@ -23,6 +24,7 @@ export default function CartPage() {
             setEmail(user.email || "");
             setAddress(user.address || "");
             setPaymentMethod("");
+            setReceiveEmail(false);
         }
     }, [user]);
 
@@ -59,7 +61,8 @@ export default function CartPage() {
                     items: cart.map(item => ({
                         productId: item.id,
                         quantity: item.quantity
-                    }))
+                    })),
+                    sendEmail: receiveEmail
                 })
             });
             const data = await res.json();
@@ -162,6 +165,11 @@ export default function CartPage() {
                         <div className="checkoutFlex">
                             <label htmlFor="userPP" id="uPP">Payment Method:</label>
                             <input type="text" id="userPP" name="userPP" value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)} required />
+                        </div>
+
+                        <div className="checkoutFlex">
+                            <label htmlFor="receiveEmail" id="uReceiveEmail">Do you want to receive a confirmation email?</label>
+                            <input type="checkbox" id="receiveEmail" name="receiveEmail" checked={receiveEmail} onChange={(e) => setReceiveEmail(e.target.checked)} />
                         </div>
 
                         <div className="submitFlex">

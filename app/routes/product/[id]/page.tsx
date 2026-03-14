@@ -8,6 +8,8 @@ import Footer from "@/app/components/footer/footer";
 import Image from "next/image";
 import "@/app/css/product.css";
 import Link from "next/link";
+import { UseCart } from "@/app/context/cartContext";
+import { ProductContext } from "@/app/context/productContext";
 
 type Product = {
     product_id: number;
@@ -23,6 +25,8 @@ export default function ProductPage() {
     const id = Array.isArray(params.id) ? params.id[0] : params.id;
     const productId = Number(id);
 
+    const { addToCart } = UseCart();
+
     const [product, setProduct] = useState<Product | null>(null);
 
     useEffect(() => {
@@ -31,10 +35,34 @@ export default function ProductPage() {
         .then(data => setProduct(data));
     }, [productId]);
 
+    const handleAddtoCart = () => {
+        if (product) {
+            addToCart({
+                id: product.product_id,
+                image: product.image_url,
+                title: product.product_name,
+                price: product.product_price,
+                description: product.product_description,
+            });
+        }
+    }
+
+    const handleBuyNow = () => {
+        if (product) {
+            addToCart({
+                id: product.product_id,
+                image: product.image_url,
+                title: product.product_name,
+                price: product.product_price,
+                description: product.product_description,
+            });
+        }
+    }
+
     if (!product) {
         return <p>Loading...</p>
     }
-
+    
     console.log(product);
 
     return (
@@ -63,9 +91,9 @@ export default function ProductPage() {
                 </div>
 
                 <div className="cartOptions">
-                    <button className="addToCart">Add to Cart</button>
+                    <button className="addToCart" onClick={handleAddtoCart}>Add to Cart</button>
                     <Link href="/routes/shoppingcart">
-                        <button className="buyNow">Buy Now</button>
+                        <button className="buyNow" onClick={handleBuyNow}>Buy Now</button>
                     </Link>
                 </div>
             </div>

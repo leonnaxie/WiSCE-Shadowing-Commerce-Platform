@@ -5,6 +5,7 @@ CREATE TABLE users (
 );
 
 SELECT * FROM products;
+SELECT * FROM products;
 
 CREATE table products (
     product_id SERIAL PRIMARY KEY,
@@ -36,9 +37,20 @@ CREATE table order_items (
     subtotal NUMERIC(10, 2)
 );
 
+SELECT * FROM users;
 SELECT * FROM products;
 SELECT * FROM orders;
 SELECT * FROM order_items;
+
+ALTER TABLE orders
+ADD COLUMN send_email
+BOOLEAN DEFAULT FALSE;
+
+UPDATE products
+SET stock_quantity = 99;
+
+
+SELECT * FROM orders;
 
 SELECT order_id 
 FROM order_items;
@@ -50,6 +62,9 @@ SELECT * FROM users;
 ALTER TABLE users ADD COLUMN username VARCHAR(255);
 SELECT * FROM users;
 
+
+TRUNCATE TABLE order_items, orders, users RESTART IDENTITY CASCADE;
+TRUNCATE TABLE users RESTART IDENTITY;
 
 UPDATE users
 SET username = 'jharris'
@@ -311,6 +326,15 @@ SET stock_quantity = 99
 WHERE product_id = 2;
 SELECT * FROM products;
 
+UPDATE products
+SET stock_quantity = 99
+WHERE product_id = 4;
+
+UPDATE products
+SET stock_quantity = 99
+WHERE product_id = 1;
+
 UPDATE users
 SET orders_placed = 0
-WHERE id = 11;
+WHERE id = 8;
+SELECT * FROM users;
