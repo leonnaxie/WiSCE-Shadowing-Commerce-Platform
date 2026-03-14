@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import pool from "@/db/databasepg";
-import { producer, connectProducer } from "@/app/kafka_lib/kafka";
 
 export async function POST(req: Request) {
     const client = await pool.connect();
@@ -84,24 +83,7 @@ export async function POST(req: Request) {
             [totalPrice, orderId]
         );
 
-        await connectProducer();
-
         await client.query("COMMIT");
-
-        await producer.send({
-            topic: "order-created",
-            messages: [
-                {
-                    value: JSON.stringify({
-                        orderId,
-                        customerId,
-                        totalPrice
-                    }),
-                },
-            ],
-        });
-
-        console.log("event published: order-created");
 
         return NextResponse.json({ success: true, orderId });
     } catch (err) {

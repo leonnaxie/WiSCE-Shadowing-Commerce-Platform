@@ -37,6 +37,7 @@ CREATE table order_items (
     subtotal NUMERIC(10, 2)
 );
 
+SELECT * FROM users;
 SELECT * FROM products;
 SELECT * FROM orders;
 SELECT * FROM order_items;
