@@ -1,5 +1,12 @@
 import { NextResponse } from "next/server";
 import pool from "@/db/databasepg";
+import { SNSClient, PublishCommand } from "@aws-sdk/client-sns";
+
+const sns = new SNSClient({
+            region: process.env.AWS_REGION ?? "us-east-1",
+            endpoint: "http://localhost:4566",
+            credentials: { accessKeyId: "test", secretAccessKey: "test" },
+        });
 
 export async function POST(req: Request) {
     const client = await pool.connect();
@@ -85,6 +92,23 @@ export async function POST(req: Request) {
         );
 
         await client.query("COMMIT");
+
+
+        console.log("sendEmail value:", sendEmail);
+        console.log("SNS_TOPIC_ARN:", process.env.SNS_TOPIC_ARN);
+
+        if (sendEmail) {
+            const snsResponse = await sns.send(new PublishCommand({
+                TopicArn: process.env.SNS_TOPIC_ARN,
+                Message: JSON.stringify({
+                    orderId,
+                    email,
+                    totalPrice,
+                    shippingAddress
+                }),
+            }));
+            console.log("SNS publish response:", JSON.stringify(snsResponse, null, 2));
+        }
 
         const responseBody = {
             success: true,
