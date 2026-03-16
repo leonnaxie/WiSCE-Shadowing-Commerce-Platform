@@ -64,40 +64,42 @@ export default function UserProfile() {
         <div className="userProfilePage">
             <Header />
             <div className="profileContent">
-                <div className="profileCard">
-                    <h1 className="profileGreeting">HELLO <span className="userName">{name || 'Person'}</span></h1>
+                <div className="half-half-container"></div>
+                
+                    <div className="profileCard">
+                        <h1 className="profileGreeting">HELLO <span className="userName">{name || 'Person'}</span></h1>
 
 
-                <form onSubmit={handleSubmit} className="profileForm">
-                        <div className="profileField">
-                            <label htmlFor="name">Name:</label>
-                            <input type="text" id="name" value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            placeholder="What's your name?" />
-                        </div>
+                    <form onSubmit={handleSubmit} className="profileForm">
+                            <div className="profileField">
+                                <label htmlFor="name">Name:</label>
+                                <input type="text" id="name" value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                placeholder="What's your name?" />
+                            </div>
 
-                        <div className="profileField">
-                            <label htmlFor="email">Email:</label>
-                            <input type="email" id="email" value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Email" />
-                        </div>
+                            <div className="profileField">
+                                <label htmlFor="email">Email:</label>
+                                <input type="email" id="email" value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Email" />
+                            </div>
 
-                        <div className="profileField">
-                            <label htmlFor="address">Address:</label>
-                            <input type="text" id="address" value={address}
-                            onChange={(e) => setAddress(e.target.value)}
-                            placeholder="Address" />
-                        </div>
+                            <div className="profileField">
+                                <label htmlFor="address">Address:</label>
+                                <input type="text" id="address" value={address}
+                                onChange={(e) => setAddress(e.target.value)}
+                                placeholder="Address" />
+                            </div>
 
-                        <div className="profileField">
-                            <label htmlFor="orders">Orders Placed:</label>
-                            <span className="ordersCount">{ordersPlaced}</span>
-                        </div>
+                            <div className="profileField">
+                                <label htmlFor="orders">Orders Placed:</label>
+                                <span className="ordersCount">{ordersPlaced}</span>
+                            </div>
 
-                        <button type="submit" className="saveBtn">SAVE</button>
-                </form>
-                </div>
+                            <button type="submit" className="saveBtn">SAVE</button>
+                    </form>
+                    </div>
             </div>
             <Footer />
         </div>
