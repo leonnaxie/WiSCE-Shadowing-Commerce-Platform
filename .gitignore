@@ -47,3 +47,7 @@ next-env.d.ts
 db/
 schema.sql
 mockData/
+
+# docker
+docker-compose.yml
+emailWorker.ts
