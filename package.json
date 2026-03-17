@@ -9,7 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.1009.0",
     "@aws-sdk/client-sns": "^3.1009.0",
+    "@aws-sdk/client-sqs": "^3.1009.0",
     "@react-oauth/google": "^0.13.4",
     "bcrypt": "^6.0.0",
     "context": "^3.0.33",

@@ -230,6 +230,14 @@ body {
   display: inline-block;
 }
 
+.carouselNavItem {
+  margin-right: 20px;
+}
+
+.carouselNavItem:last-child {
+  margin-right: 0;
+}
+
 .carouselNavBtn {
   display: inline-block;
   width: 1.5rem;
@@ -455,6 +463,11 @@ body {
   color: var(--button-texts);
 }
 
+.fpBtns button:hover {
+  background-color: var(--carousel-arrows);
+  color: white;
+}
+
 .viewProductListings {
   position: absolute;
   bottom: 10px;
@@ -469,6 +482,12 @@ body {
   cursor: pointer;
   border-radius: 25px;
   color: var(--button-texts);
+}
+
+.viewPLBtn:hover {
+  background-color: var(--carousel-arrows);
+  color: white;
+  transform: 0.4s;
 }
 
 
