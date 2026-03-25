@@ -338,3 +338,85 @@ UPDATE users
 SET orders_placed = 0
 WHERE id = 8;
 SELECT * FROM users;
+
+
+INSERT INTO products
+(product_name, product_price, product_description, stock_quantity, image_url)
+VALUES
+(
+    'Half-Colored Bag',
+    30,
+    'A bag that you can toss over your shoulders, with a portion of it being exceptionally fluffy.',
+    99,
+    '/product_images/half_bag.png'
+),
+(
+    'Leather Brown Bag',
+    25,
+    'A classic that everyone should own, with a beaded accessory that comes for free.',
+    99,
+    '/product_images/leather_brown_bag.png'
+),
+(
+    'Bleached Sky Bag',
+    15,
+    'A pale, bleached bag that has details of a grand city and a beaded bow.',
+    99,
+    '/product_images/bleached_bag.png'
+),
+(
+    'Alternative Bag',
+    25,
+    'A chic hand-held bag that has a plaid background and an alternative but cute print on the front.',
+    99,
+    '/product_images/alt_print_bag.png'
+),
+(
+    'Angelic Bag',
+    10,
+    'A soft, thin but durable bag that has ribbons streaming from both sides.',
+    99,
+    '/product_images/ribbons_bag.png'
+),
+(
+    'Green Star Bag',
+    30,
+    'A camo-green leathery pouch that has a black pointed star in the front. It has many zippers.',
+    99,
+    '/product_images/green_star_bag.png'
+),
+(
+    'Y2K Tote Bag',
+    25,
+    'A cotton bag that has a lot of storage space and can be sealed in the front.',
+    99,
+    '/product_images/y2k_tote_bag.png'
+),
+(
+    'Patchwork Bag',
+    45,
+    'A curved purse that has four different patches of colors ranging from orange to green.',
+    99,
+    '/product_images/patchwork_bag.png'
+),
+(
+    'Black Purse',
+    45,
+    'A tiny coin purse that has red and pink flowers embroidiered in the front.',
+    99,
+    '/product_images/black_purse.png'
+),
+(
+    'Hello Kitty Backpack',
+    20,
+    'A kid-sized pink and velvet backpack that has the iconic childhood show mascot on the front.',
+    99,
+    '/product_images/hello_kitty_bacpack.png'
+);
+
+
+SELECT * FROM products;
+
+UPDATE products
+SET image_url = '/product_images/hello_kitty_backpack.png'
+WHERE product_id = 40;
